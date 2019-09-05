@@ -2,6 +2,9 @@
  * Author : miniLCT
  * More : You build it. You run it
  ************************************/
+//  lyd蓝书 306 页
+//  带有修改的区间最值问题   使用线段树维护f数组  可在O(log N) 的时间内执行查询更新操作
+//  注意处理贴纸 左右端点超出【L,R】的边界情况
 #include <stack>
 #include <queue>
 #include <map>
@@ -26,38 +29,7 @@ const double PI = acos(-1.0);
 const double E = exp(1);
 const double EPS=1e-8;
 const int maxn = 1e6+10;
-int a[maxn],c[maxn];
-int n,V;
-int used[maxn];
-int dp[maxn];
-int book[maxn];
-
 int main()
 {
-	close;
-	while(cin>>n>>V&&(n+V)){
-		memset(book , 0 , sizeof (book));
-		for(int i = 1; i <= n;i++)
-		    cin>>a[i];
-		for(int i = 1; i <= n;i++)
-			cin>>c[i];
-		book[0] = 1;
-		for(int i = 1; i <= n;i++){
-			for(int k = 0; k <= V;k++){
-				dp[k] = 0;
-			}
-			for(int j =a[i]; j <= V;j++){
-				if(!book[j]&&book[j-a[i]]&&(dp[j-a[i]]<c[i])){
-					dp[j] = dp[j-a[i]]+1;
-					book[j] = 1;
-					//cout <<"dasd"<<endl;
-				}
-			}
-		}
-		int ans = 0;
-		for(int i = 1; i <= V;i++){
-			if(book[i])ans++;
-		}
-		cout << ans <<endl;
-	}     
+     
 }

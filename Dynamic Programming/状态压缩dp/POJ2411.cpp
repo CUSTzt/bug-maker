@@ -26,38 +26,29 @@ const double PI = acos(-1.0);
 const double E = exp(1);
 const double EPS=1e-8;
 const int maxn = 1e6+10;
-int a[maxn],c[maxn];
-int n,V;
-int used[maxn];
-int dp[maxn];
-int book[maxn];
-
+int n, m;
+long long f[100][maxn];
+bool in_s[maxn];
 int main()
 {
-	close;
-	while(cin>>n>>V&&(n+V)){
-		memset(book , 0 , sizeof (book));
-		for(int i = 1; i <= n;i++)
-		    cin>>a[i];
-		for(int i = 1; i <= n;i++)
-			cin>>c[i];
-		book[0] = 1;
+	while(cin >> n >> m&&n){
+		for(int i = 0; i < 1<<m;i++){
+			bool cnt = 0 , has_odd = 0;
+			for(int j = 0; j < m;j++)
+				if(i >> j&1)has_odd|=cnt , cnt = 0;
+			else cnt ^=1;
+			in_s[i] = has_odd | cnt ? 0 : 1;
+		}
+		f[0][0] = 1;
 		for(int i = 1; i <= n;i++){
-			for(int k = 0; k <= V;k++){
-				dp[k] = 0;
+			for(int j = 0; j < 1<<m;j++){
+				f[i][j] = 0;
+				for(int k = 0; k < (1<<m);k++)
+					if((j&k)==0&&in_s[j|k])
+						f[i][j]  += f[i-1][k];
 			}
-			for(int j =a[i]; j <= V;j++){
-				if(!book[j]&&book[j-a[i]]&&(dp[j-a[i]]<c[i])){
-					dp[j] = dp[j-a[i]]+1;
-					book[j] = 1;
-					//cout <<"dasd"<<endl;
-				}
-			}
+
 		}
-		int ans = 0;
-		for(int i = 1; i <= V;i++){
-			if(book[i])ans++;
-		}
-		cout << ans <<endl;
-	}     
+		cout << f[n][0]<<endl;
+	} 
 }

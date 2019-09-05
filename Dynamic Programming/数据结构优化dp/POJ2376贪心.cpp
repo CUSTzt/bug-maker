@@ -26,38 +26,38 @@ const double PI = acos(-1.0);
 const double E = exp(1);
 const double EPS=1e-8;
 const int maxn = 1e6+10;
-int a[maxn],c[maxn];
-int n,V;
-int used[maxn];
-int dp[maxn];
-int book[maxn];
+struct Node{
+	int left , right ;
+}cow[maxn];
+bool cmp(Node a, Node b){
+	if(a.left != b.left)return a.left < b.left;
+	else return a.left > b.left;
+}
+int n , t;
 
 int main()
 {
-	close;
-	while(cin>>n>>V&&(n+V)){
-		memset(book , 0 , sizeof (book));
-		for(int i = 1; i <= n;i++)
-		    cin>>a[i];
-		for(int i = 1; i <= n;i++)
-			cin>>c[i];
-		book[0] = 1;
-		for(int i = 1; i <= n;i++){
-			for(int k = 0; k <= V;k++){
-				dp[k] = 0;
-			}
-			for(int j =a[i]; j <= V;j++){
-				if(!book[j]&&book[j-a[i]]&&(dp[j-a[i]]<c[i])){
-					dp[j] = dp[j-a[i]]+1;
-					book[j] = 1;
-					//cout <<"dasd"<<endl;
-				}
+	cin >> n >>t;
+	for(int i = 0; i < n ;i++){
+		cin>>cow[i].left>>cow[i].right;
+	}
+	sort(cow , cow+n,cmp);
+	int local = 0, ans = 0, p = -1;
+	for(int i = 0; i < n ;i++){
+		if(cow[i].left > local+1){	
+			if(p == -1)break;
+			ans ++;
+			local = p;
+			p = -1;
+		}
+		if(cow[i].left <= local + 1 && cow[i].right >= local + 1){
+			p = max( p , cow[i].right);
+			if(p >= t){
+				ans ++;
+				break;
 			}
 		}
-		int ans = 0;
-		for(int i = 1; i <= V;i++){
-			if(book[i])ans++;
-		}
-		cout << ans <<endl;
-	}     
+	}
+	if(p >= t)cout << ans << endl;
+	else cout << -1 << endl;  
 }
