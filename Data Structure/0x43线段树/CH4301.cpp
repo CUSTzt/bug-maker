@@ -69,9 +69,7 @@ int main()
 	for(int i = 1; i <= n ;i++){
 		cin >> a[i];
 	}
-	//cout << 1<<endl;
 	build(1, 1, n);
-	//cout << 2<<endl;
 	for(int i = 0; i < m;i++){
 		int k , x ,y;
 		cin >> k >> x >> y;
