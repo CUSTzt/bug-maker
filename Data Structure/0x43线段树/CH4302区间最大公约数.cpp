@@ -55,7 +55,7 @@ void update(int p , int x, int v){
 }
 int ask(int p , int l , int r ){
 	if(l > r)return 0;
-	if(l < t[p].l && r > t[p].r)return abs(t[p].dat);
+	if(l <= t[p].l && r >= t[p].r)return abs(t[p].dat);
 	int mid = (t[p].l + t[p].r) / 2;
 	int vl = 0 , vr = 0;
 	if(l <= mid)vl = ask(p*2, l , r);
@@ -68,6 +68,7 @@ void add(int x, int v, int *b){
 int query(int x, int *b){
 	int res = 0;
 	for(; x; x -= lowbit(x))res += b[x];
+		//cout << 1<<endl;
 	return res;
 }
 main()
@@ -86,10 +87,7 @@ main()
 		if(ch == 'Q'){
 			cin >> xx >> yy;
 			int ans =__gcd(a[xx]+query(xx,b), ask(1,xx + 1,yy));
-			//int anss = __gcd(a[xx] + query(xx,b), ask(a, xx+1, yy));
-			//cout << __gcd(a[xx] + query(xx, b), ask(a, xx+1, yy))<<endl;
 			cout << ans <<endl;
-	
 		}
 		if(ch == 'C'){
 			cin >> xx >> yy >> zz;
@@ -99,8 +97,6 @@ main()
 			add(yy+1 , -zz, b); 
 		}
 	}
-
-
 }
 
 /******************************************************
