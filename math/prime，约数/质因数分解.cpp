@@ -1,7 +1,8 @@
 //  质因数分解： 扫描2~√n  的数整除，并且记录个数  O(√n)
 int p[maxn],c[maxn];
+int m ;
 void divide(int n){
-	int m = 0;
+	m = 0;
 	int sqrtn = sqrt(n);
 	for(int i = 2; i <= sqrtn; i++){
 		if(n % i == 0){  //i是质数
