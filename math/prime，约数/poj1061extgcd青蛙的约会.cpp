@@ -1,48 +1,28 @@
-/***********************************************
- * @Author:      miniLCT
- * @DateTime:    2019-08-15 10:05:25
- * @Description: You build it, You run it.  
- ***********************************************/
-//#include <bits/stdc++.h>
-#include<algorithm>
 #include<iostream>
 #include<cstdio>
-#include<cstring>
+#define ll long long 
 using namespace std;
-typedef long long ll;
-ll exgcd(ll a,ll b,ll &x,ll &y)
-{
-    if(b==0)
-    {
-        x=1;
-        y=0;
-        return a;
-    }
-    ll r=exgcd(b,a%b,y,x);
-    y-=a/b*x;
-    return r;
+ll d,x1,y1;
+ll exgcd(ll a, ll b, ll &x,ll &y){
+    if(b == 0){x = 1;y = 0;return a;}
+    d = exgcd(b, a%b, x, y);
+    ll z = x;x = y;y = z-y*(a/b);
+    return d;
 }
+
 int main()
 {
-    ll x,y,m,n,l;
+    ll n,m,x,y,l;
     cin>>x>>y>>m>>n>>l;
-    ll a=n-m,b=l,c=x-y;
-    ll d=exgcd(a,b,x,y);
-    if(c%d)
-        cout<<"Impossible"<<endl;
-    else {
-        x=x*c/d;
-        ll t=x*d/b;
-        x=x-t*b/d;
-        if(x<0)
-            x+=b/d;
-        cout<<x<<endl;
-    }
-    return 0;
+    ll b=n-m,a=x-y;
+    if(b<0)
+    {
+        b=-b;
+        a=-a;
+    }//处理负数 
+        exgcd(b,l,x1,y1);
+    if(a%d!=0)//判断方程有无解。 
+        cout<<"Impossible";
+    else
+        cout<<((x1*(a/d))%(l/d)+(l/d))%(l/d);//处理负数 
 }
-/****************************************************
- *stuff you should look for
- *int overflow, array bounds
- *special cases (n=1?), set tle
- *do smth instead of nothing and stay organized
-****************************************************/

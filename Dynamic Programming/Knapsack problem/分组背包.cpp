@@ -1,5 +1,3 @@
-
-
 //注意i ， j ， k 三个的 顺序，要满足条件的  每一组最多一个。  阶段   状态    决策   三个的关系搞清楚
 #include <iostream>
 #include <cstdio>
