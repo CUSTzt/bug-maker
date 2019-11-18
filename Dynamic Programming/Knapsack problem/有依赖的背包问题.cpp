@@ -1,3 +1,8 @@
+/*
+有 N 个物品和一个容量是 V 的背包。
+物品之间具有依赖关系，且依赖关系组成一棵树的形状。如果选择一个物品，则必须选择它的父节点
+*/
+
 //#include <bits/stdc++.h>
 #include <iostream>
 #include <cstdio>
