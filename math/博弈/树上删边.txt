@@ -1,0 +1,5 @@
+https://blog.csdn.net/wu_tongtong/article/details/79311284
+
+克朗原理：对于树上的某一个点，ta的分支可以转化成以这个点为根的一根竹子，这个竹子的长度就是ta各个分支的边的数量的异或和
+
+  

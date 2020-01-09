@@ -1,17 +1,27 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "myc++", //你的设置文件名，可随便起
-            "type": "shell", //运行task的平台，一般是shell
-            "command": "bash ./build.sh", //普通的shell命令，运行你的.sh文件
-            "group": {
-                "kind": "build", //设置为build组，这样当你在vscode中执行build命令时，
-                                 //就能自动执行"command"中的命令了
-                "isDefault": true
-            }
+            "type": "shell",
+            "label": "g++",//这里的值要与launch.json中的 preLaunchTask 值一样
+            "command": "C:\\MinGW\\bin\\g++.exe",//刚刚安装好的g++路径
+            "args": [
+                "-g",
+                "-Wall",
+                "-static-libgcc",
+                "-std=c++11",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:\\MinGW\\bin"//刚刚安装好的MinGW路径
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }

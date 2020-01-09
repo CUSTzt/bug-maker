@@ -1,17 +1,22 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/a.out",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",//也可以用workspaceFolder，不过一定要与task.json中的保持一致
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${fileDirname}",//同上
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": true,//使用外部terminal
             "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",//gdb的安装路径
+            "preLaunchTask": "g++",//表示在执行调试之前会先进行编译
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
