@@ -1,0 +1,24 @@
+// She is Pretty pretty!
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define ff first
+#define ss second
+#define mp make_pair
+#define pb push_back
+
+const int N = 1e6+100;
+//题意：给定一个n个点m条边的无向图，
+//要求找出一个点数恰好为√n的独立集，或者找出一个点数>=√n的环（上取整）
+vector<int > v[N];
+int fa[N], dep[N], num[N], n , m , lim, x, y ;
+int main()
+{
+    ios_base::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+    cin >> n >> m;
+    memset(dep , 0xff, sizeof dep);
+    lim = ceil(sqrt(1.0*n))
+    
+    return 0;
+}

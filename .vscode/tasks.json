@@ -11,7 +11,7 @@
                 "-g",
                 "-Wall",
                 "-static-libgcc",
-                "-std=c++11",
+                "-std=c++17",
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"

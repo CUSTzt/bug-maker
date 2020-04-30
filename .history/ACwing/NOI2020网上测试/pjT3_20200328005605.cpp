@@ -1,0 +1,31 @@
+// She is Pretty pretty!
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long 
+#define ll long long
+#define ff first
+#define ss second
+#define mp make_pair
+#define pb push_back
+
+const int N = 1e6 + 100;
+const int MAXN = 110;
+const int MAXM = 2505;
+int n, m, k, u, v, w,dis[MAXN][MAXN];
+std::tuple<int, int, int> e[MAXM];
+struct Matrix{
+    int a[MAXN][MAXN];
+    Matrix (){}
+    Matrix(int t[][]){
+
+    }
+}a;
+int32_t main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> n >> m >> k;
+
+    return 0;
+}

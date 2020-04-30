@@ -1,0 +1,3 @@
+alignment game
+Smith–Waterman algorithm 
+也是类似于lcs的

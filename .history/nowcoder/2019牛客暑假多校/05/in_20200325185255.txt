@@ -1,0 +1,35 @@
+#include<cstdio>
+2 #include<cmath>
+3 #include<map>
+4 #include<algorithm>
+5 #include<tr1/unordered_map>
+6 using namespace std::tr1;
+7 using namespace std;
+8 typedef long long ll;
+9 typedef pair<int,int>P;
+10 int phi(int n){
+11 int t=1,i;
+12 for(i=2;i*i<=n;i++)if(n%i==0)for(n/=i,t*=i−1;n%i==0;n/=i,t*=i);
+13 if(n>1)t*=n−1;
+14 return t;
+15 }
+16 int pow(ll a,int b,int m){ll t=1;for(;b;b>>=1,a=a*a%m)if(b&1)t=t*a%m;return t;}
+17 int bsgs(int a,int r,int m){
+18 if(r>=m)return −1;
+19 int i,g,x,c=0,at=int(2+sqrt(m));
+20 for(i=0,x=1%m;i<50;i++,x=ll(x)*a%m)if(x==r)return i;
+21 for(g=x=1;__gcd(int(ll(x)*a%m),m)!=g;c++)g=__gcd(x=ll(x)*a%m,m);
+22 if(r%g)return −1;
+23 if(x==r)return c;
+24 unordered_map<int,int>u;
+25 g=phi(m/g),u[x]=0;g=pow(a,g−at%g,m);
+26 for(i=1;i<at;i++){
+27 u.insert(P(x=ll(x)*a%m,i));
+28 if(x==r)return c+i;
+29 }
+30 for(i=1;i<at;i++){
+31 unordered_map<int,int>::iterator t=u.find(r=ll(r)*g%m);
+32 if(t!=u.end())return c+i*at+t−>second;
+33 }
+34 return −1;
+35 }
