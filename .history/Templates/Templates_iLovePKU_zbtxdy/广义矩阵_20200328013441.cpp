@@ -1,1 +1,0 @@
-https://www.saikr.com/vse/ipc2020  

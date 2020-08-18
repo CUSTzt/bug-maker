@@ -1,1 +1,0 @@
-print(sum(map(int , input().spilt())))

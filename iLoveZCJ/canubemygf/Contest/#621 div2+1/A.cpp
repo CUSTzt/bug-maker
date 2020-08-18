@@ -35,7 +35,7 @@ int main()
         for(int i = 0; i < n; i++){
             cin >> a[i];
         }
-        for(int i = 1; i <= n; i++){
+        for(int i = 1; i < n; i++){
             if(a[i] == 0)continue;
             if(a[i]*i <= d){
                 a[0] += a[i];

@@ -15,7 +15,7 @@ ll mod_pow(ll x, ll n ,ll mod){
 ll ToneLLi_Shanks(ll n , ll p){ // 无解返回-1，有解返回其中一个解r，另一个解p-r
     if(n == 0)return 0;
     if(p == 2)return (n & 1) ? 1 : -1;
-    if(mod_pow(n , p >> 1, p) != 1)return -1;
+    if(mod_pow(n , p >> 1, p) != 1)return -1; // pdsbsecsy
     if(p & 2)return mod_pow(n , p+1 >> 2, p);
     int s = __builtin_ctzll(p ^ 1);
     ll q = p >> s, z = 2;

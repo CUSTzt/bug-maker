@@ -43,3 +43,38 @@ Matrix pow_mod(Matrix base, ll n)
     }
     return res;
 }
+
+
+
+struct Matrix {
+    int v[M][M];
+    Matrix() { memset(v, 0, sizeof v); }
+    Matrix operator+(const Matrix& rhs) {
+        static Matrix res;
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < m; ++j) res.v[i][j] = pls(v[i][j], rhs.v[i][j]);
+        return res;
+    }
+    Matrix operator*(const Matrix& rhs) {
+        Matrix res;
+        for (int i = 0; i < m; ++i)
+            for (int k = 0; k < m; ++k)
+                for (int j = 0; j < m; ++j) inc(res.v[i][j], 1LL * v[i][k] * rhs.v[k][j] % mod);
+        return res;
+    }
+    void init(void) {
+        memset(v, 0, sizeof v);
+        for (int i = 0; i < m; ++i) v[i][i] = 1;
+    }
+    Matrix operator^(int k) {
+        Matrix res, base;
+        base = *this, res.init();
+        while (k) {
+            if (k & 1)
+                res = res * base;
+            base = base * base;
+            k >>= 1;
+        }
+        return res;
+    }
+};

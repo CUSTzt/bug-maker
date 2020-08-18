@@ -1,0 +1,84 @@
+1 #include<vector>
+2 #include<cstdio>
+3 #include<cstring>
+4 #include<iostream>
+5 #include<algorithm>
+6 using namespace std;
+7 const int N = 2005;
+8 int n, m;
+9 char s[N], t[N];
+10 int from[N][N], cnt[N], ans[N][N], dp[N][N];
+11 int main() {
+12 memset(from, −1, sizeof(from));
+13 memset(dp, −1, sizeof(dp));
+14 scanf(”%s%s”, s, t);
+15 n = strlen(s), m = strlen(t);
+16 dp[0][0] = 0, from[0][0] = 0;
+17 for (int i = 0; i <= m; ++i) {
+18 for (int j = 0; j <= n; ++j) {
+19 if (j && dp[i][j − 1] > dp[i][j]) {
+20 dp[i][j] = dp[i][j − 1];
+21 from[i][j] = 0;
+22 }
+23 if (i && j && s[j − 1] == t[i − 1] && dp[i − 1][j − 1] + 1 > dp[i][j]) {
+24 dp[i][j] = dp[i − 1][j − 1] + 1;
+25 from[i][j] = 1;
+26 }
+27 if (i && dp[i − 1][j] > dp[i][j]) {
+28 dp[i][j] = dp[i − 1][j];
+29 from[i][j] = 2;
+30 }
+31 }
+32 }
+33 for (int i = 1; i <= m; ++i) {
+34 cnt[i − 1] = 0;
+35 for (int j = 0; j <= n; ++j) {
+36 cnt[i − 1] += !!from[i][j];
+37 }
+38 −−cnt[i − 1];
+39 }
+40 for (int i = 0; i < m; ++i) {
+41 /*
+42 for (int j = i; j <= m; ++j) {
+43 for (int k = 0; k <= n; ++ k) {
+44 putchar(from[j][k] == 1 ? ’\\’ : ’ ’);
+45 putchar(from[j][k] == 2 ? ’|’ : ’ ’);
+46 }
+47 puts(””);
+48 for (int k = 0; k <= n; ++ k) {
+49 putchar(from[j][k] == 0 ? ’−’ : ’ ’);
+50 putchar(’*’);
+51 }
+52 printf(”\n”);
+53 }
+54 printf(”\n”);
+55 */
+56 for (int j = i; j < m; ++j) {
+57 ans[i][j] = cnt[j];
+58 }
+59 int x = i, y = 0;
+60 from[i + 1][0] = 0;
+61 while (y <= n) {
+62 if (x < m && from[x + 1][y] == 2) {
+63 from[x + 1][y] = 0;
+64 −−cnt[x];
+65 ++x;
+66 } else if (x < m && from[x + 1][y + 1] == 1) {
+67 from[x + 1][y + 1] = 0;
+68 −−cnt[x];
+69 ++x, ++y;
+70 } else {
+71 ++y;
+72 }
+73 }
+74 }
+75 for (int i = 0; i < m; ++i) {
+76 for (int j = 0; j < m; ++j) {
+77 if (j < i) {
+78 printf(” ”);
+79 } else {
+80 printf(”%d%c”, ans[i][j], j == m − 1 ? ’\n’ : ’ ’);
+81 }
+82 }
+83 }
+84 }

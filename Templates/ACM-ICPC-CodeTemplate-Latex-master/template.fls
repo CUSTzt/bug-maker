@@ -1,0 +1,17 @@
+PWD c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master
+INPUT d:/texlive/2019/texmf.cnf
+INPUT d:/texlive/2019/texmf-dist/web2c/texmf.cnf
+INPUT d:/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.tex
+OUTPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.log
+INPUT d:/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT d:/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.aux
+INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.aux
+OUTPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.aux
+OUTPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.pdf
+INPUT d:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/ACM-ICPC-CodeTemplate-Latex-master/template.aux
+INPUT d:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT d:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
+INPUT d:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb

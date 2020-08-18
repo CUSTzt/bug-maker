@@ -64,4 +64,3 @@ int main()
         printf("%d\n",miu[i]);
     return 0;
 }
-

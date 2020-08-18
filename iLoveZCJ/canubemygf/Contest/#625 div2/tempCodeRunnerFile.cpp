@@ -1,92 +1,71 @@
-//others s
-#include<cstdio>
-#include<algorithm>
-#include<cstring>
-#define lc x<<1
-#define rc x<<1|1
-#define mid ((l+r)>>1)
-#define ll long long
+#include <stack>
+#include <queue>
+#include <map>
+#include <set>
+#include <vector>
+#include <random>
+#include <cmath>
+#include <chrono>
+#include <cstring>
+#include <algorithm>
+#include <string>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cassert>
 using namespace std;
-struct Tree
-{
-	ll add;
-	ll minn;
-}tree[4000005];
-struct Data
-{
-	ll cost;
-	int val;
-}a[200005],b[200005];
-struct Monster
-{
-	int x,y;
-	ll c;
-}c[200005];
-int n,m,p;
-void pushup(int x)
-{
-	tree[x].minn=min(tree[lc].minn,tree[rc].minn);
-}
-void pushdown(int x)
-{
-	if(tree[x].add)
-	{
-		tree[lc].add+=tree[x].add;
-		tree[rc].add+=tree[x].add;
-		tree[lc].minn+=tree[x].add;
-		tree[rc].minn+=tree[x].add;
-		tree[x].add=0;
+using LL = long long;
+#define eps 1e-8
+#define fi first
+#define se second
+#define eb emplace_back
+#define close std::ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define FOR(i, x, y) for (LL i = (x), _##i = (y); i < _##i; ++i)
+#define FORD(i, x, y) for (LL i = (x), _##i = (y); i > _##i; --i)
+#define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
+#define CASET int ___T; cin>>___T; for(int __CS=1;__CS<=___T;__CS++)
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pii;
+mt19937 dlsrand(random_device{}());
+mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+int rnd(int x) { return mrand() % x;}
+ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
+LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
+inline LL get_inv(LL x, LL p) { return bin(x, p - 2, p); }
+const double PI = acos(-1.0);
+constexpr int maxn = 1e6+10;
+constexpr int INF = 0x3f3f3f3f;
+constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
+constexpr int mod = 1e9+7;
+void add(int &a,int b) {a+=b; if(a>=mod) a-=mod;}
+void dec(int &a,int b) {a-=b; if(a<0) a+=mod;}
+//  质因数分解： 扫描2~√n  的数整除，并且记录个数  O(√n)
+int p[maxn],c[maxn];
+int m ;
+void divide(int n){
+	m = 0;
+	int sqrtn = sqrt(n);
+	for(int i = 2; i <= sqrtn; i++){
+		if(n % i == 0){  //i是质数
+			p[++m] = i;
+			c[m] = 0;
+			while(n % i == 0)n /= i,c[m]++; // 除掉所有的i
+		}
 	}
-}
-void update(int x,int l,int r,int from,int to,ll v)
-{
-	if(from>to)return;
-	if(l>=from&&r<=to)
-	{
-		tree[x].add+=v;
-		tree[x].minn+=v;
-		return;
-	}
-	pushdown(x);
-	if(from<=mid)update(lc,l,mid,from,to,v);
-	if(to>mid)update(rc,mid+1,r,from,to,v);
-	pushup(x);
-}
-bool cmp1(Data a,Data b)
-{
-	return a.val<b.val||(a.val==b.val&&a.cost>b.cost);
-}
-bool cmp2(Monster x,Monster y)
-{
-	return x.x<y.x;
+	if(n > 1)//n是质数
+		p[++m] = n, c[m] = 1;
+	for(int i = 1; i <= m; i++)
+		cout << p[i] << '^' << c[i] <<"     ";
 }
 int main()
 {
-	scanf("%d%d%d",&n,&m,&p);
-	for(int i=1;i<=n;i++)scanf("%d%lld",&a[i].val,&a[i].cost);
-	for(int i=1;i<=m;i++)scanf("%d%lld",&b[i].val,&b[i].cost);
-	for(int i=1;i<=p;i++)scanf("%d%d%lld",&c[i].x,&c[i].y,&c[i].c);
-	sort(a+1,a+n+1,cmp1);
-	sort(b+1,b+m+1,cmp1);
-	sort(c+1,c+p+1,cmp2);
-	b[++m].val=1000000,b[m].cost=10000000000;
-	for(int i=m;i>=1;i--)
-	{
-		if(i!=m&&b[i].cost>b[i+1].cost)b[i].cost=b[i+1].cost;
-		update(1,1,1000000,b[i-1].val+1,b[i].val,b[i].cost);
-//		printf("[%d,%d],%lld\n",b[i-1].val+1,b[i].val,b[i].cost);
-	}
-	int now=1;
-	ll ans=1e18;
-	for(int i=1;i<=n;i++)
-	{
-		while(now<=p&&c[now].x<a[i].val)
-		{
-			update(1,1,1000000,c[now].y+1,1000000,-c[now].c);
-			now++;
-		}
-		ans=min(ans,tree[1].minn+a[i].cost);
-	}
-	printf("%lld\n",-ans);
-	return 0;
+     int n;
+     cin >> n;
+     while(n--){
+     	int x;
+     	cin >> x;
+     	divide(x);
+     }
+    
 }

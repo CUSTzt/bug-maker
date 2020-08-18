@@ -1,2 +1,0 @@
-alignment game
-Smith–Waterman algorithm 
