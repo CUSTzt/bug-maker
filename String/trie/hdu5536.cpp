@@ -1,8 +1,8 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-const int MAXN = 1e5+10;
+const int MAXN = 1e5 + 10;
 struct Trie {
     int root, tot, nxt[MAXN][2], cnt[MAXN], end[MAXN];
 
@@ -61,21 +61,21 @@ struct Trie {
 } tr;
 
 int a[MAXN];
-int main(){
-    ios_base::sync_with_stdio(0),cin.tie(nullptr);
+int main() {
+    ios_base::sync_with_stdio(0), cin.tie(nullptr);
     int t;
     cin >> t;
-    while(t--){
+    while (t--) {
         tr.Init();
         int n;
         cin >> n;
         int ma = 0;
-        for(int i = 0; i < n; i++) cin >> a[i], tr.Insert(a[i]);
-        for(int i = 0; i < n; i++){
-            for(int j = i+1; j < n; j++){
+        for (int i = 0; i < n; i++) cin >> a[i], tr.Insert(a[i]);
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
                 tr.Del(a[i]);
                 tr.Del(a[j]);
-                ma = max(ma , tr.Search(a[i] + a[j]));
+                ma = max(ma, tr.Search(a[i] + a[j]));
                 tr.Insert(a[i]), tr.Insert(a[j]);
             }
         }

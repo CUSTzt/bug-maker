@@ -65,12 +65,9 @@ int main() {
             g[x].push_back(Node(y, w));
             g[y].push_back(Node(x, w));
         }
-
         dis[1] = 0;
         dfs(1, -1, 0);
-
         Init_LCA();
-
         while (m--) {
             int x, y;
             scanf("%d%d", &x, &y);

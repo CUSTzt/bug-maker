@@ -80,3 +80,44 @@ int main()
     cout << dep <<endl;
     
 }
+
+
+template <typename T>
+void read(T &x) {
+    x = 0;
+    int f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = x * 10 + (ch ^ 48);
+        ch = getchar();
+    }
+    x *= f;
+    return;
+}
+template <typename T>
+void write(T x) {
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
+}
+template <class T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for (T &x : v) is >> x;
+    return is;
+}
+template <class T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    if (!v.empty()) {
+        os << v.front();
+        for (int i = 1; i < v.size(); ++i) os << ' ' << v[i];
+    }
+    return os;
+}

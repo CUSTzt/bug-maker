@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}0x00 基本算法}{3}% 
+\contentsline {subsection}{\numberline {1.1}0x01 位运算}{3}% 
+\contentsline {subsubsection}{\numberline {1.1.1}快速幂}{3}% 
+\contentsline {subparagraph}{bin }{3}% 
+\contentsline {subsubsection}{\numberline {1.1.2}GCC内置函数}{3}% 
+\contentsline {subparagraph}{与机器或编译器版本有关，部分竞赛可能会禁止}{3}% 
+\contentsline {section}{\numberline {2}0x10 基本数据结构}{3}% 
+\contentsline {section}{\numberline {3}0x20 搜索}{3}% 
+\contentsline {section}{\numberline {4}0x30 数学知识}{3}% 
+\contentsline {section}{\numberline {5}0x40 数据结构结构}{3}% 
+\contentsline {section}{\numberline {6}0x50 动态规划}{3}% 
+\contentsline {section}{\numberline {7}0x60 图论}{3}% 
+\contentsline {section}{\numberline {8}0x70 综合技巧与实践}{3}% 

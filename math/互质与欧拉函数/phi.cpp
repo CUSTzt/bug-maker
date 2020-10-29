@@ -9,3 +9,4 @@ int phi(int n) {
     if (n > 1) ans = ans / n * (n - 1);  //质数
     return ans;
 }
+

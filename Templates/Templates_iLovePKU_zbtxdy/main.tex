@@ -1,0 +1,85 @@
+\documentclass[UTF8]{article}
+\usepackage{fontspec} 
+\usepackage{xltxtra} 
+\usepackage{xeCJK}
+\usepackage{fancyhdr}
+\usepackage{xunicode}
+\usepackage{ctex} 
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{latexsym}
+\author{miniLCT{}}
+\pagestyle{fancy}
+\rhead{ACM International Collegiate Programming Contest}
+%\setCJKmainfont[BoldFont=SimHei]{SimSun}
+%\setmainfont{qingsong} %主要字体
+\title{算法竞赛进阶指南 代码参考} 
+
+\newfontfamily\codefont{Source Code Pro}
+\geometry{a4paper,scale=0.8,left=3.0cm,top=2.5cm,bottom=2.5cm} %格式
+\lstset{ 
+    rulesepcolor= \color{gray}, %代码块边框颜色
+    tabsize=4,
+    breaklines=true,  %代码过长则换行
+    numbers=left, %行号在左侧显示
+    numberstyle= \small,%行号字体
+    showstringspaces=false,
+    commentstyle=\color{gray}, %注释颜色
+    frame=lines,
+    basicstyle=\codefont,
+    language=c++,
+}
+\begin{document}
+\maketitle{}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{a.png}
+%\caption{The Universe}
+%\label{fig:universe}
+\end{figure}
+\newpage
+\tableofcontents
+\newpage
+
+%\part{Start}
+\section{0x00 基本算法}
+\subsection{0x01 位运算}
+\subsubsection{快速幂}
+\subparagraph{bin }
+\begin{lstlisting}
+LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
+inline LL get_inv(LL x, LL p) { return bin(x, p - 2, p); }
+\end{lstlisting}
+\subsubsection{GCC内置函数}
+\subparagraph{与机器或编译器版本有关，部分竞赛可能会禁止}
+
+\begin{lstlisting}
+int __builtin_ctz(unsigned int x)
+int __builtin_ctzll(unsigned long long x)
+返回x的二进制表示下最低位的1后面几个0
+int __builtin_popcount(unsigned int x)
+int __builtin_popcountll(unsigned long long x)
+返回x的二进制表示下有多少位1
+\end{lstlisting}
+
+
+\section{0x10 基本数据结构}
+
+\section{0x20 搜索}
+
+\section{0x30 数学知识}
+
+\section{0x40 数据结构结构}
+
+\section{0x50 动态规划}
+
+\section{0x60 图论}
+
+\section{0x70 综合技巧与实践}
+
+
+\end{document}
+% Local Variables:
+% TeX-engine: xelatex
+% End:

@@ -46,7 +46,7 @@ int hash(int x) {
     return 3;
 }
 int main() {
-    scanf("%d %d %s %s", &n1, &n2, s, t);
+    scanf(" %s %s", &n1, &n2, s, t);
     i = 0;
     for (m = (n1 - 1) / E, h = (m ? E : n1) - 1; i < n1; i++)
         ap[hash(s[i])].set(i);

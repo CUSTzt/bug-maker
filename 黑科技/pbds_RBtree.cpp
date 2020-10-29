@@ -14,14 +14,6 @@ struct RBTree {
     int findKth(int x) { return *rb.find_by_order(x); }
     int findElementRank(int x) { return rb.order_of_key(x); }
 };
-#define ll long long
-#define ff first
-#define ss second
-#define mp make_pair
-#define pb push_back
-
-const int N = 1e6 + 100;
-
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);

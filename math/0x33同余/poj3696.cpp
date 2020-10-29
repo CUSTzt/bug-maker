@@ -92,5 +92,4 @@ main()
             printf("Case %lld: %lld\n", ++kase, ans);
         }
     }
-     
 }
