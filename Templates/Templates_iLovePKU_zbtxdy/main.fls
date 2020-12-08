@@ -1,9 +1,9 @@
-PWD c:/Users/Answer Accepted/Desktop/Lerica/Templates/Templates_iLovePKU_zbtxdy
+PWD e:/Lerica/Templates/Templates_iLovePKU_zbtxdy
 INPUT d:/texlive/2019/texmf.cnf
 INPUT d:/texlive/2019/texmf-dist/web2c/texmf.cnf
 INPUT d:/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/Templates_iLovePKU_zbtxdy/main.tex
-OUTPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/Templates_iLovePKU_zbtxdy/main.log
+INPUT e:/Lerica/Templates/Templates_iLovePKU_zbtxdy/main.tex
+OUTPUT e:/Lerica/Templates/Templates_iLovePKU_zbtxdy/main.log
 INPUT d:/texlive/2019/texmf-dist/tex/latex/base/article.cls
 INPUT d:/texlive/2019/texmf-dist/tex/latex/base/article.cls
 INPUT d:/texlive/2019/texmf-dist/tex/latex/base/size10.clo
@@ -29,7 +29,7 @@ INPUT d:/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT d:/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT d:/texlive/2019/texmf-dist/tex/generic/unicode-data/UnicodeData.txt
 INPUT d:/texlive/2019/texmf-dist/tex/generic/unicode-data/UnicodeData.txt
-INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/Templates_iLovePKU_zbtxdy/nul:
-INPUT c:/Users/Answer Accepted/Desktop/Lerica/Templates/Templates_iLovePKU_zbtxdy/nul:.tex
+INPUT e:/Lerica/Templates/Templates_iLovePKU_zbtxdy/nul:
+INPUT e:/Lerica/Templates/Templates_iLovePKU_zbtxdy/nul:.tex
 INPUT d:/texlive/2019/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 INPUT d:/texlive/2019/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
