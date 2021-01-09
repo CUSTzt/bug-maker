@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 11:33:42
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,25 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int a[maxn], n;
 int main()
 {
-    
+    close;
+    CASET{
+        cin >> n;
+        for(int i = 1; i <= n; i++){
+            cin >> a[i];
+        }
+        int ans = 0;
+        for(int i = n; i ; i--){
+            if(i + a[i] <= n){
+                a[i] += a[i+a[i]];
+            }
+        }
+        for(int i = 1; i <= n; i++){
+            umax(ans ,a[i]);
+        }
+        cout << ans << endl;
+    }
     return 0;
 }

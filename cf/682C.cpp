@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-02 16:18:11
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -13,6 +14,7 @@
 //using namespace __gnu_pbds;
 using namespace std;
 using LL = long long;
+#define int LL
 #define eps 1e-8
 #define fi first
 #define se second
@@ -52,8 +54,44 @@ constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
-int main()
+int32_t main()
 {
-    
+    close;
+    int n;
+    cin >> n;
+    vi a(n+1);
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
+    }
+    vi sz(n+10);
+    vector<pii> e[n+10];
+    function<void (int)> dfs1 = [&](int u){
+        // cout << "u === " << u << endl;
+        sz[u] = 1ll;
+        for(int i = 0; i < e[u].size(); i++){
+            int v = e[u][i].fi;
+            dfs1(v);
+            sz[u] += sz[v];   
+        }
+    };
+    function<int (int , int)> dfs2 = [&](int u , int f){
+        // cout << "uu == " << u << "  ff == " << f << endl;
+        if(f > a[u]) return sz[u];
+        ll res = 0ll;
+        for(int i = 0; i < e[u].size(); i++){
+            int v = e[u][i].fi;
+            int w = e[u][i].se;
+            res += dfs2(v , max(0ll , f+w));
+        }
+        return res;
+    };
+    for(int i = 2; i <= n; i++){
+        int p , c;
+        cin >> p >> c;
+        e[p].eb(i , c);
+    }
+    dfs1(1);
+    ll ans = dfs2(1,0);
+    cout << ans << endl;
     return 0;
 }

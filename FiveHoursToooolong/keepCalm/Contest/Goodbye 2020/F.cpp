@@ -51,9 +51,53 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+vi g[maxn];
+int n , m;
+int fa[maxn];
+void init(int n) {for (int i = 1; i <= n; i++) fa[i] = i;}
+int find(int x) { return x == fa[x] ? x : fa[x] = find(fa[x]); }
+void Union(int x, int y) {
+    x = find(x), y = find(y);
+    if (x == y) return;
+    fa[x] = y;
+}
 int main()
 {
-    
+    close;
+    cin >> n >> m;
+    init(m+n+1);
+    vi ans , fl(n+m+1), vis(n+m+1);
+    for(int i = 1; i <= n; i++){
+        int k, x;
+        cin >> k;
+        for(int j = 1; j <= k; j++){
+            cin >> x;
+            g[i].eb(x);
+        }
+        if(k != 2){
+            int x = g[i].front();
+            // cout << "x === " << x << endl;
+            x = find(x);
+            if(vis[x])continue;
+            vis[x] = 1;
+            ans.eb(i);
+        }else {
+            int x = g[i].front(), y = g[i].back();
+            // cout << "x === " << x  << "  y === " << y << endl;
+            
+            x = find(x), y = find(y);
+            if(x == y) continue;
+            if(vis[x] && vis[y]) continue;
+            fa[x] = y;
+            ans.eb(i);
+            vis[y] |= vis[x];
+        }
+    }   
+    // cout << "fuck " << endl;
+    int anss = bin(2, SZ(ans), mod);
+    cout << anss << " " << SZ(ans) <<endl;
+    for(auto v : ans){
+        cout << v << " ";
+    }cout << endl;
     return 0;
 }

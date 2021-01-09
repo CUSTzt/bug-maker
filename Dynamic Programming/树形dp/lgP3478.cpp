@@ -51,9 +51,61 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
+const int N = 1e6 + 10;
+struct Edge {
+    int nxt, to, w;
+} edge[N << 1];
+int head[N], tot, n , u , v;
+void add_edge(int u, int v, int w) {
+    edge[++tot].nxt = head[u];
+    edge[tot].to = v;
+    edge[tot].w = w;
+    head[u] = tot;
+}
 
+ll dis[N], si[N],  k, vis[N], f[maxn];
+void dfs(int u, int fa) {
+    dis[u] = dis[fa] + 1;
+    si[u] = 1;
+    for (int i = head[u]; i; i = edge[i].nxt) {
+        int v = edge[i].to;
+        if (v == fa) continue;
+        dfs(v, u);
+        si[u] += si[v];
+    }
+}
+void dfs1(int u , int fa){
+    for(int i = head[u]; i ; i = edge[i].nxt) {
+        int v = edge[i].to;
+        if(v == fa) continue;
+        // cout << "si[" << v << "]=="<< si[v] << endl; 
+        // cout << "u === " << u << " v == " << v << endl;
+        f[v] = f[u] + n - 2 * si[v];
+        // cout << "now  f[" << v << "]=="<<f[v] << endl;
+        dfs1(v , u);
+    }
+}
 int main()
 {
-    
+    close;
+    cin >> n;
+    for(int i = 1; i < n; i++){
+        cin >> u >> v;
+        add_edge(u , v , 1);
+        add_edge(v , u , 1);
+    }
+    dfs(1 , 0);
+    for(int i = 1; i <= n; i++){
+        f[1] += dis[i];
+    }
+    dfs1(1, 0);
+    ll ans = 0, id = 0;
+    for(int i = 1; i <= n; i++){
+        // cout << "now  f[" << i << "]=="<<f[i] << endl;
+        if(ans < f[i]) {
+            ans = f[i], id = i;
+        }
+    }
+    cout << id << endl;
     return 0;
 }

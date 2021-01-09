@@ -51,9 +51,22 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+string s;
 int main()
 {
-    
+    close;
+    CASET{
+        cin >> s;
+        int len = s.size();
+        if(len & 1){
+            cout << "NO"<< endl;
+            continue;
+        }
+        if(s[0] == ')' || s[len-1] == '('){
+            cout << "NO" << endl;
+            continue;
+        }
+        cout << "YES" << endl;
+    }
     return 0;
 }

@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-07 14:55:27
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -31,11 +32,10 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-constexpr int mod = 1e9+7;
-constexpr int Erica = 998244353;
-mt19937 dlsrand(random_device{}());
-mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
-int rnd(int x) { return mrand() % x;}
+constexpr int mod = 1e9+7; // 998244353
+// mt19937 dlsrand(random_device{}());
+// mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+// int rnd(int x) { return mrand() % x;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 ll ex_gcd(ll a, ll b, ll& x, ll& y){if(!b){x=1;y=0;return a;}ll ret=ex_gcd(b,a%b,y,x);y-=a/b*x;return ret;}
 LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
@@ -51,9 +51,63 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+const int N = 3e5 + 10;
+struct Edge {
+    int nxt, to, w;
+} edge[N << 1];
+int head[N], tot;
+void add_edge(int u, int v, int w) {
+    edge[++tot].nxt = head[u];
+    edge[tot].to = v;
+    edge[tot].w = w;
+    head[u] = tot;
+}
+int dp[maxn];
 int main()
 {
-    
+    close;
+    int n , u , v;
+    cin >> n;
+    for(int i = 1; i < n; i++){
+        cin >> u >> v;
+        add_edge(u , v, 0);
+        add_edge(v , u, 1);
+    }
+    function<void (int , int)> dfs1 = [&](int u , int fa){
+        for(int i = head[u]; i ; i = edge[i].nxt){
+            int v = edge[i].to;
+            if(v == fa) continue;
+            dfs1(v , u);
+            if(!edge[i].w) {
+                dp[u] += dp[v];
+            }else {
+                dp[u] += dp[v] + 1;
+            }
+        }
+    };
+    function<void (int , int)> dfs2 = [&](int u , int fa){
+        for(int i = head[u]; i ; i = edge[i].nxt){
+            int v = edge[i].to;
+            if(v == fa) continue;
+            if(!edge[i].w) {
+                dp[v] = dp[u] + 1;
+            }else {
+                dp[v] = dp[u] - 1;
+            }
+            dfs2(v , u);
+        }
+    };
+    dfs1(1, 0);
+    dfs2(1, 0);
+    int ans = INF;
+    for(int i = 1; i <= n; i++){
+        umin(ans, dp[i]);
+    }
+    cout << ans << endl;
+    for(int i = 1; i <= n; i++){
+        if(dp[i] == ans) {
+            cout << i << " ";
+        }
+    }cout << endl;
     return 0;
 }

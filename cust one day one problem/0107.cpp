@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-07 21:06:25
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -31,11 +32,10 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-constexpr int mod = 1e9+7;
-constexpr int Erica = 998244353;
-mt19937 dlsrand(random_device{}());
-mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
-int rnd(int x) { return mrand() % x;}
+constexpr int mod = 1e9+7; // 998244353
+// mt19937 dlsrand(random_device{}());
+// mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+// int rnd(int x) { return mrand() % x;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 ll ex_gcd(ll a, ll b, ll& x, ll& y){if(!b){x=1;y=0;return a;}ll ret=ex_gcd(b,a%b,y,x);y-=a/b*x;return ret;}
 LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
@@ -54,6 +54,48 @@ constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
 int main()
 {
-    
+    close;
+    int n;
+    cin >> n;
+    vi a(n+10), ans;
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
+    }
+    if(n & 1){
+        cout << "YES\n" << n-2 << endl;
+        for(int i = 1; i <= n-2; i += 2){
+            cout << i << ' ' << i+1 << ' ' << i+2 <<endl;
+        }
+        for(int i = n-3; i - 1 >= 1; i -= 2){
+            cout << i << " " << i-1 << " " << n << endl;
+        }
+    }else {
+        for(int i = 1; i <= n-2; i += 2){
+            int tp = 0;
+            for(int j = i; j <= i+2; j++){
+                ans.eb(j);
+                tp ^= a[j];
+            }
+            for(int j = i ; j <= i+2; j++){
+                a[j] = tp;
+            }
+        }
+        for(int i = n - 4; i - 1 >= 1; i -= 2){
+            ans.eb(i);
+            ans.eb(i-1);
+            ans.eb(n-1);
+            int tp = a[i] ^ a[i-1] ^ a[n-1];
+            a[i] = a[i-1] = a[n-1] = tp;
+        }
+        if(a[n] != a[n-1]){
+            cout << "NO" << endl;
+        }else {
+            cout << "YES" << endl; 
+            cout << SZ(ans) / 3 << endl;
+            for(int i = 0; i < ans.size(); i+=3){
+                cout << ans[i] << " " << ans[i+1] << " " << ans[i+2] << endl;
+            }
+        }
+    }
     return 0;
 }

@@ -51,9 +51,31 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n , m;
+char a[1005][1005], b[1005][1005];
 int main()
 {
-    
+    close;
+    cin >> n >> m;
+    for(int i = 1; i <= n; i++){
+        cin >> (a[i] + 1);
+    }
+    int cnt = 0;
+    for(int i = 1; i <= n; i++){
+        cin >> (b[i] + 1);
+        for(int j = 1; j <= m; j++){
+            cnt += (a[i][j] != b[i][j]);
+        }
+    }
+  {
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= m; j++){
+                 if(cnt <= n*m/2) cout << a[i][j];
+                 else {
+                     cout << (a[i][j] == 'X' ? '.':'X');
+                 }
+            }cout << endl;
+        }
+    }
     return 0;
 }

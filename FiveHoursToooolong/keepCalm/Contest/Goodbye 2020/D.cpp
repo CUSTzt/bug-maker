@@ -13,6 +13,7 @@
 //using namespace __gnu_pbds;
 using namespace std;
 using LL = long long;
+#define int LL
 #define eps 1e-8
 #define fi first
 #define se second
@@ -51,9 +52,38 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
+int w[maxn];
+vi g[maxn];
+void up(){
+    int n, u , v, ans = 0;
+    cin >> n;
+    for(int i = 0; i < n+10; i++) g[i].clear();
+    for(int i = 1; i <= n; i++){
+        cin >> w[i];
+        ans += w[i];
+    }
+    for(int i = 1; i < n; i++){
+        cin >> u >> v;
+        g[u].eb(v), g[v].eb(u);
+    }
+    vi fk;
+    for(int i = 1; i <= n; i++){
+        if(SZ(g[i]) > 1){
+            for(int j = 1; j < SZ(g[i]); j++)fk.eb(w[i]);
+        }
+    }
+    sort(ALL(fk),[](int a , int b){return a > b;});
+    cout << ans;
+    for(auto i : fk){
+        ans += i;
+        cout << " " << ans; 
+    }cout << endl;
+}
+int32_t main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

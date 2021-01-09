@@ -51,9 +51,43 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
+#define int LL
+ll dp[40][2][2][2], l[40], r[40], X , Y;
+int32_t main()
 {
-    
+    close;
+    CASET {
+        /*
+        由于i&j=0,所以(i+j)一定不会进位,log2(i+j)一定是他们的最高位1的位置.
+        令d[len][limit1][limit2][zero]表示:
+        当前长度为len,i的高位限制,j的高位限制,当前已枚举的值是否是0,的贡献.
+        */
+        memset(dp , 0xff, sizeof dp);
+        int len = 0;
+        cin >> X >> Y;
+        while(X || Y){
+            l[len] = (X & 1);
+            r[len] = (Y & 1);
+            X >>= 1; Y >>= 1;
+            len++;
+        }
+        function<int(int , int , int , bool)> dfs = [&](int pos , int l1 , int l2, bool pre){
+            if(pos == -1) return 1ll;
+            if(-1 != dp[pos][l1][l2][pre]) return dp[pos][l1][l2][pre];
+            int mx1 = l1 ? l[pos] : 1;
+            int mx2 = l2 ? r[pos] : 1;
+            int ans = 0;
+            for(int i = 0; i <= mx1; i++){
+                for(int j = 0; j <= mx2; j++){
+                    if(i & j) continue;
+                    int t = 1;
+                    if(pre && (i || j)) t = pos+1;
+                    add(ans , dfs(pos-1, l1 && i == mx1, l2 && j == mx2, pre && (!i) && (!j)) * t % mod);
+                }
+            }
+            return dp[pos][l1][l2][pre] = ans;
+        };
+        cout << (dfs(len-1, 1, 1 , 1) - 1 + mod) % mod << endl;
+    }
     return 0;
 }

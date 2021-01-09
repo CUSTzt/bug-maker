@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-03 11:56:32
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,25 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n , x[maxn], y[maxn];
 int main()
 {
-    
+    close;
+    cin >> n;
+    for(int i = 1; i <= n; i++){
+        cin >> x[i] >> y[i];
+    }
+    int ans = 0;
+    function<int(int , int)> calc = [&](int a, int b){
+        if(b == 0) return 0;
+        if(1.0*a/b <= 1.0 && 1.0*a/b>= -1.0)return 1;
+        return 0;
+    };
+    for(int i = 1; i <= n; i++){
+        for(int j = i+1; j <= n; j++){
+            ans+=calc(y[j]-y[i], x[j]-x[i]);
+        }
+    }
+    cout << ans << endl;
     return 0;
 }

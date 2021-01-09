@@ -51,9 +51,29 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+vi g[maxn];
+int n , u , v;
 int main()
 {
-    
+    close;
+    cin >> n;
+    for(int i = 1; i < n; i++){
+        cin >> u >> v;
+        g[u].eb(v), g[v].eb(u);
+    }
+    vi vis(n+10);
+    function<double(int)> dfs = [&](int x){
+        vis[x] = 1;
+        int sz = SZ(g[x]);
+        double p = 0;
+        for(auto v : g[x]){
+            if(vis[v]) sz--;
+        }
+        for(auto v : g[x]){
+            if(!vis[v])p += (1.0 + dfs(v))/sz;
+        }
+        return p;
+    };
+    cout << dfs(1) << endl;
     return 0;
 }

@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-03 12:26:24
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,22 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+ll n , suma , sumb;
 int main()
 {
-    
-    return 0;
+    vector<ll> v;
+    cin >> n;
+    for(int i = 0; i < n ; i++){
+        ll x, y;
+        cin >> x >> y ;
+        suma += x;
+        v.eb(2*x + y);
+    }
+    sort(ALL(v), greater<ll>());
+    int ans = 0;
+    for(int i = 0; i < n; i++){
+        if(suma < 0) break;
+        suma -= v[i];
+        ans++;
+    }cout << ans << endl;
 }

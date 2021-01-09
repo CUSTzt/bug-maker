@@ -51,9 +51,34 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int a[maxn], vis[maxn];
+void up(){
+    int n;
+    cin >> n;
+    for(int i = 0; i <= n*2+10; i++){
+        vis[i] = 0;
+    }
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
+    }
+    for(int i = 1; i <= n; i++){
+        if(vis[a[i]]) {
+            vis[a[i]+1] = 1;
+        }else {
+            vis[a[i]] = 1;
+        }
+    }
+    int cnt = 0;
+    for(int i = 0; i <= n*2+10; i++){
+        cnt += (vis[i] > 0);
+    }
+    cout << cnt << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

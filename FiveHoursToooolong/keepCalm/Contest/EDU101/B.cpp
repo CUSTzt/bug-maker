@@ -51,9 +51,33 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+void up(){
+    int n , m ;
+    cin >> n;
+    vi a(n+10);
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
+        a[i] += a[i-1];
+    }
+    cin >> m;
+    vi b(m+10);
+    for(int i = 1; i <= m; i++){
+        cin >> b[i];
+        b[i] += b[i-1];
+    }
+    int ans = 0;
+    for(int i = 0; i <= n; i++){
+        for(int j = 0; j <= m; j++){
+            umax(ans , a[i]+b[j]);
+        }
+    }
+    cout << ans << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

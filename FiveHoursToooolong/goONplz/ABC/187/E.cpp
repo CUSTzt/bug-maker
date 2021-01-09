@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-05 20:55:44
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -54,6 +55,62 @@ constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
 int main()
 {
-    
+    ll n;
+    cin >> n;
+    vector<pair<ll, ll> > e(n-1);
+    vector<vector<ll>> tree(n);
+    for(int i = 0; i < n-1; i++){
+        ll u  , v;
+        cin >> u >> v;
+        u--, v--;
+        e[i] = {u , v};
+        tree[u].eb(v), tree[v].eb(u);
+    }
+    vector<ll> dis(n, -1);
+    int q;
+    cin >> q;
+    queue<int> que;
+    que.push(0);
+    dis[0] = 0;
+    while(que.size()){
+        auto x = que.front();
+        que.pop();
+        for(auto y : tree[x]){
+            if(dis[y] == -1){
+                dis[y] = dis[x] + 1;
+                que.push(y);
+            }
+        }
+    }
+    vector<ll> val(n,0);
+    while (q--){
+        ll op , x , y;
+        cin >> op >> x >> y;
+        x--;
+        ll u = e[x].fi , v = e[x].se;
+        if(dis[u] > dis[v]){
+            swap(u , v);
+            op ^= 3;
+        }
+        if(op == 1){
+            val[0] += y, val[v] -= y;
+        }else {
+            val[v] += y;
+        }
+    }
+    que.push(0);
+    while(que.size()){
+        auto x = que.front();
+        que.pop();
+        for(auto y : tree[x]){
+            if(dis[y] > dis[x]){
+                val[y] += val[x];
+                que.push(y);
+            }
+        }
+    }
+    for(int i = 0; i < n; i++){
+        cout << val[i] << endl;
+    }
     return 0;
 }

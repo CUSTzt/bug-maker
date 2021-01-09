@@ -51,9 +51,13 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int a , b , c;
 int main()
 {
-    
+    close;
+    CASET{
+        cin >> a >> b >> c;
+        cout << max(0,2*(max({a, b , c}) - min({a, b , c}) - 2)) << endl;
+    }
     return 0;
 }

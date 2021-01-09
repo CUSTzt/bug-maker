@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 23:38:48
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,51 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+void up(){
+    int n , m;
+    cin >> n >> m;
+    vi d(n+10 , INF);
+    int id[n+10];
+    vi g[n+10];
+    for(int i = 1; i <= n; i++) id[i] = i;
+    d[1] = 0;
+    for(int i = 0; i < m; i++){
+        int u , v;
+        cin >> u >> v;
+        g[u].eb(v);
+    }
+    queue<int> q;
+    q.push(1);
+    while(q.size()){
+        auto u = q.front();
+        q.pop();
+        for(auto v : g[u]){
+            if(d[v] > d[u] + 1){
+                d[v] = d[u] + 1;
+                q.push(v);
+            }
+        }
+    }
+    // cout << "fuck" << endl;
+    sort(id + 1, id + 1 + n, [&](int x,  int y){return d[x] > d[y];});
+    vi dp(n+10);
+    for(int i = 1; i <= n; i++){
+        int u = id[i];
+        dp[u] = d[u];
+        for(auto v : g[u]) umin(dp[u], d[v]);
+        for(auto v : g[u]) if(d[v] > d[u]){
+            umin(dp[u], dp[v]);
+        }
+    }
+    for(int i = 1; i <= n; i++){
+        cout << dp[i] << " \n"[i == n];
+    }
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

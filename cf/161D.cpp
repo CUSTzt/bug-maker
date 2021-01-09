@@ -51,9 +51,43 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+const int N = 5e4 + 10;
+struct Edge {
+    int nxt, to, w;
+} edge[N << 1];
+int head[N], tot;
+void add_edge(int u, int v, int w) {
+    edge[++tot].nxt = head[u];
+    edge[tot].to = v;
+    edge[tot].w = w;
+    head[u] = tot;
+}
+int dp[N][505], k, n;
+ll ans = 0;
+void dfs(int u , int fa){
+    dp[u][0] = 1;
+    for(int i = head[u]; i ; i = edge[i].nxt){
+        int v = edge[i].to;
+        if(fa == v) continue;
+        dfs(v , u);
+        for(int j = 0; j < k; j++){
+            ans += 1ll * dp[u][j] * dp[v][k-1-j];
+        }
+        for(int j = 1; j <= k; j++){
+            dp[u][j] += dp[v][j-1];
+        }
+    }
+}
 int main()
 {
-    
+    close;
+    cin >> n >> k;
+    for(int i = 1; i < n; i++){
+        int u , v;
+        cin >> u >> v;
+        add_edge(u , v, 1); add_edge(v , u , 1);
+    }
+    dfs(1, 0);
+    cout << ans << endl;
     return 0;
 }

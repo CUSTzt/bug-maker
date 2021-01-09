@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-03 12:16:58
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,26 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+set<string> s;
+int n;
 int main()
 {
-    
+    close;
+    cin >> n;
+    while(n--){
+        string t;
+        cin >> t;
+        s.insert(t);
+    }
+    for(auto i : s){
+        if(i.front() != '!'){
+            string tp = "!" + i;
+            if(s.count(tp)){
+                cout << i << endl;
+                return 0;
+            }
+        }
+    }
+    cout << "satisfiable" << endl;
     return 0;
 }

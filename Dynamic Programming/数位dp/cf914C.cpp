@@ -50,10 +50,48 @@ const double PI = acos(-1.0);
 constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
-constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+constexpr int maxn = 1e3+10; // remember to calculate. if tle, check maxn first.
+ll dp[3][maxn][maxn][10];
+int k, cnt[maxn];
+char s[maxn];
 int main()
 {
-    
+    memset(dp , 0xff , sizeof dp);
+    function<int(int)> get = [&](int x){
+        if(x == 1){
+            return 0;
+        }
+        int cnt = 0;
+        while(x) {
+            if(x & 1) cnt++;
+            x /= 2;
+        }
+        return 1 + get(cnt);
+    };
+    for(int i = 1; i < maxn; i++){
+        cnt[i] = get(i) + 1;
+    }
+    function<ll(ll , ll , ll , bool)> dfs = [&](ll pos , ll pre , ll num , bool fl){
+        if(pos < 0) return (cnt[num] == k) * 1ll;
+        if(!fl && dp[pre][pos][num][k] != -1) return dp[pre][pos][num][k];
+        int res = fl ? s[pos] : 1;
+        ll ret = 0;
+        for(int i = 0; i <= res; i++){
+            add(ret , dfs(pos - 1, i , num + (i == 1), fl && i == res) % mod);
+        }
+        if(!fl) dp[pre][pos][num][k] = ret%mod;
+        return ret%mod;
+    };
+    cin >> s >> k;
+    int len = strlen(s);
+    reverse(s , s+len);
+    for(int i = 0; i < len; i++){
+        s[i] -= '0';
+    }
+    ll ans = dfs(len - 1, 0 , 0  ,true) ;
+    if(k == 1 && ans){
+        ans--;
+    }
+    cout << ans << endl;
     return 0;
 }

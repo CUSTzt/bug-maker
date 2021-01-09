@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-01 19:24:38
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -47,13 +48,50 @@ template<class T>inline void umax(T &x, T y) {x = x < y ? y : x;}
 template<class T>inline void dec(T &x, T y) {x -= y; if(x < 0) x += mod;}
 template<class T>inline void add(T &x, T y) {x += y; if(x >= mod) x -= mod;}
 const double PI = acos(-1.0);
-constexpr int INF = 0x3f3f3f3f;
+constexpr int INF = 1e6;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
-constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
-{
-    
-    return 0;
+constexpr int maxn = 510; // remember to calculate. if tle, check maxn first.
+int n, a[maxn], dp[maxn][maxn];
+int main() {
+    close;
+    cin >> n;
+    vi ans(n+10);
+    for(int i = 0; i < n; i++) cin >> a[i];
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            dp[i][j] = -INF;
+        }
+        dp[i][i] = 0;
+    } 
+    dp[n][n] = 0;
+    for(int len = 3; len <= n; len += 3) {
+        for(int i = 0; i + len <= n; i++) {
+            int j = i + len;
+            for(int k = 0; k <= 3; k++) {
+                int v = 0;
+                for(int l = 0; l < 3; l++){
+                    if(l < k) v += a[i+l];
+                    else v += a[j-(3-l)];
+                }
+                umax(v , 0);
+                umax(dp[i][j], dp[i+k][j-3+k] + v);
+            }
+            for (int k = i + 1; k < j - 1; k++)
+                dp[i][j] = max (dp[i][j], dp[i+1][k] + dp[k+1][j-1] + max (0, a[i] + a[k] + a[j-1]));
+            for (int k = i + 1; k < j-1; k++)
+                umax (dp[i][j], dp[i][k] + dp[k][j]);
+        }
+    }
+    for (int i = 0; i <= n; i++)
+        ans[i] = -1e7;
+    ans[0] = 0;
+    for (int i = 0; i < n; i++)
+    {
+        //cout << ans[i] << "\n";
+        for (int j = i + 1; j <= n; j++)
+            ans[j] = max (ans[j], ans[i] + max (dp[i][j], 0));
+    }
+    cout << ans[n] << "\n";
+    return 0; 
 }

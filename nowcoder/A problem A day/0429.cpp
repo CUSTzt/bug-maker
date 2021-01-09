@@ -51,9 +51,17 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+ll dp[maxn];
 int main()
 {
-    
+    ll n,m;
+    while(cin>>n>>m)
+    {
+        dp[1]=0,dp[2]=1,dp[3]=1;
+        for(ll i=4;i<=n;i++) {
+            dp[i]=((i-1)*(dp[i-1]+dp[i-2])-(i-1)*(i-2)/2*dp[i-3])%m;
+        }
+        cout<<(dp[n]+m)%m<<endl;
+    }
     return 0;
 }

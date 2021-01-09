@@ -51,9 +51,28 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
+#define int LL
+int n , k , d;
+int g[1005][1005];
+int32_t main()
 {
-    
+    close;
+    cin >> n >> k >> d;
+    for(int i = 0; i < n; i++){
+        int tp = i;
+        for(int j = 0; j < d; j++){
+            g[i][j] = tp % k;
+            tp /= k;
+        }
+        if(tp){
+            return cout << -1 << endl, 0;
+        }
+    }
+    for(int i = 0; i < d; i++){
+        for(int j = 0; j < n; j++){
+            cout << g[j][i] + 1 << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }

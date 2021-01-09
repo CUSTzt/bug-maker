@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-05 22:10:46
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,28 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+//https://nanti.jisuanke.com/t/41399
+void up(){
+    int n , m, cnt = 0;
+    cin >> n >> m;
+    vi c;
+    for(int i = 0; i < m; i++){
+        int x, y;
+        cin >> x >> y;
+        c.eb(x), c.eb(y+1);
+    }
+    sort(ALL(c));
+    for(int i = 0 ; i + 1 < SZ(c); i+=2){
+        cnt += c[i+1] - c[i];
+    }
+    cout << cnt << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        cout << "Case #" << __CS << ": ";
+        up();
+    }
     return 0;
 }

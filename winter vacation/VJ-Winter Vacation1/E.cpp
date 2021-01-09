@@ -51,9 +51,22 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+ll n , x, a[maxn];
+void up(){
+    cin >> n>> x;
+    for(int i = 1; i <= n; i++) cin >> a[i];
+    sort(a+1, a+n+1);
+    ll cnt = 0, ans = 0;
+    for(int i = n; i >= 1; i --){
+        cnt++;if(a[i] * cnt >= x) ans++, cnt = 0;
+    }
+    cout << ans << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

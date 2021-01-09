@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-02 16:53:11
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,53 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n;
+template <typename T>
+void read(T &x) {
+    x = 0;
+    int f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = x * 10 + (ch ^ 48);
+        ch = getchar();
+    }
+    x *= f;
+    return;
+}
+template <typename T>
+void write(T x) {
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
+}
+template <class T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for (T &x : v) is >> x;
+    return is;
+}
+template <class T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    if (!v.empty()) {
+        os << v.front();
+        for (int i = 1; i < v.size(); ++i) os << ' ' << v[i];
+    }
+    return os;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        vi a(4);
+        cin >> a;
+        cout << max({min(a[0],a[1])*min(a[2],a[3]),min(a[0],a[2])*min(a[1],a[3]),min(a[0],a[3])*min(a[1],a[2])}) <<endl;
+    }
     return 0;
 }

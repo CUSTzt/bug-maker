@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 11:24:05
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,20 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+ll w, h , n;
 int main()
 {
-    
+    close;
+    CASET{
+        cin >> w >> h >> n;
+        ll res = 1;
+        while((w & 1) == 0){
+            w >>= 1, res <<= 1;
+        }
+        while((h & 1) == 0){
+            h >>= 1, res <<= 1;
+        }
+        cout << (res >= n ? "YES":"NO") << endl;
+    }
     return 0;
 }

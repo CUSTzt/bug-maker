@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-09 11:26:52
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -31,11 +32,10 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-constexpr int mod = 1e9+7;
-constexpr int Erica = 998244353;
-mt19937 dlsrand(random_device{}());
-mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
-int rnd(int x) { return mrand() % x;}
+constexpr int mod = 1e9+7; // 998244353
+// mt19937 dlsrand(random_device{}());
+// mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+// int rnd(int x) { return mrand() % x;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 ll ex_gcd(ll a, ll b, ll& x, ll& y){if(!b){x=1;y=0;return a;}ll ret=ex_gcd(b,a%b,y,x);y-=a/b*x;return ret;}
 LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
@@ -51,9 +51,19 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int a, b , c;
+double dp[110][110][110];
+double up(int x, int y , int z){
+    double s = x+y+z;
+    if(x == 100 || y == 100 || z == 100) return 0;
+    if(dp[x][y][z])return dp[x][y][z];
+    dp[x][y][z] = 1.0*x/s*up(x+1,y,z)+1.0*y/s*up(x,y+1,z)+1.0*z/s*up(x,y,z+1)+1;
+    return dp[x][y][z];
+}
 int main()
 {
-    
+    close;
+    cin >> a >> b >> c;
+    cout << up(a, b , c) << endl;
     return 0;
 }

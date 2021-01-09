@@ -51,9 +51,19 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n , d, dp[maxn];
+char s[maxn];
 int main()
 {
-    
+    memset(dp , 0x3f , sizeof dp);
+    cin >> n >> d >> (s+1);
+    dp[1] = 0;
+    for(int i = 2; i <= n; i++){
+        if(s[i] == '0') continue;
+        for(int j = max(1 , i - d); j < i; j++){
+            if(s[j] == '1') umin(dp[i], dp[j]+1);
+        }
+    }
+    cout << (dp[n] == INF ? -1 : dp[n]) <<endl;
     return 0;
 }

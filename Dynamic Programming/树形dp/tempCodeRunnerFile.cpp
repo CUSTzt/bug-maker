@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-02 15:41:32
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,46 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int hav[maxn], tmp[maxn], m, flag;
+string s;
 int main()
 {
-    
+    cin >> s;
+    s = "#"+s;
+    for(int i = 1; i <= 10; i++){
+        hav[i] = s[i] - '0';
+    }
+    cin >> m;
+    tmp[0] = -1;
+    function<void (int , int , int)> dfs = [&](int step , int l  , int r){
+        if(flag) return ;
+        if(step > m){
+            flag = 1;
+            cout << "YES\n";
+            for(int i = 1; i <= m; i++){
+                cout << tmp[i] << " \n"[i == m];
+            }
+            return ;
+        }
+        for(int i = 1; i <= 10; i++){
+            if(hav[i] && (i != tmp[step-1])){
+                if(step & 1){
+                    if(i + l > r){
+                        tmp[step] = i;
+                        dfs(step+1, i+l, r);
+                    }
+                }else {
+                    if(i+r > l){
+                        tmp[step] = i;
+                        dfs(step+1, l , i+r);
+                    }
+                }
+            }
+        }
+    };
+    dfs(1, 0 , 0);
+    if(!flag){
+        cout << "NO" << endl;
+    }
     return 0;
 }

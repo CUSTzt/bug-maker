@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-05 22:06:35
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,18 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+// https://ac.nowcoder.com/acm/contest/9854/H
+double p[maxn * 10];
 int main()
 {
-    
+    for(int i = 1; i < maxn * 10; i++){
+        p[i] = p[i-1] + 1.0 / i;
+    }
+    close;
+    CASET{
+        int n;
+        cin >> n;
+        cout << (9999+n) * p[n] << endl;
+    }
     return 0;
 }

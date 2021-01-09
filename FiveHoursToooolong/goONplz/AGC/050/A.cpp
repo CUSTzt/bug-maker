@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-01 19:22:04
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,12 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n;
 int main()
 {
-    
+    cin >> n;
+    for(int i = 1; i <= n; i++){
+        printf("%d %d\n",2*i%n+1,(2*i+1)%n+1);
+    }
     return 0;
 }

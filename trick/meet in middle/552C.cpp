@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-08 21:13:23
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -27,15 +28,14 @@ using LL = long long;
 #define FORD(i, x, y) for (LL i = (x), _##i = (y); i > _##i; --i)
 #define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
 #define CASET int ___T; cin>>___T; for(int __CS=1;__CS<=___T;__CS++)
-typedef long long ll;
+typedef __int128 ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-constexpr int mod = 1e9+7;
-constexpr int Erica = 998244353;
-mt19937 dlsrand(random_device{}());
-mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
-int rnd(int x) { return mrand() % x;}
+constexpr int mod = 1e9+7; // 998244353
+// mt19937 dlsrand(random_device{}());
+// mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+// int rnd(int x) { return mrand() % x;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 ll ex_gcd(ll a, ll b, ll& x, ll& y){if(!b){x=1;y=0;return a;}ll ret=ex_gcd(b,a%b,y,x);y-=a/b*x;return ret;}
 LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
@@ -51,9 +51,66 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+ll w, m;
+template <typename T>
+void read(T &x) {
+    x = 0;
+    int f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = x * 10 + (ch ^ 48);
+        ch = getchar();
+    }
+    x *= f;
+    return;
+}
+template <typename T>
+void write(T x) {
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
+}
+template <class T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for (T &x : v) is >> x;
+    return is;
+}
+template <class T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    if (!v.empty()) {
+        os << v.front();
+        for (int i = 1; i < v.size(); ++i) os << ' ' << v[i];
+    }
+    return os;
+}
 int main()
 {
-    
+    freopen("out.txt","w",stdout);
+    // cin >> w >> m;
+    read(w), read(m);
+    if(w <= 3){cout << "YES" << endl;return 0;}
+    // cout << "m === " << m << endl;
+    function<void (ll , ll )> dfs = [&](ll now , ll tot){
+        // cout << "now == " << now << "  tot == " << tot << "   " << (tot==m) <<  endl;
+        // write(now);cout << "   "; write(tot); cout << endl;
+        if(tot == m){
+            cout << "YES" << endl;
+            exit(0);
+        }
+        if(now > m * w) return ;
+        dfs(now * w, tot + now);
+        dfs(now * w, tot);
+        dfs(now * w, tot - now);
+    };
+    dfs(1, 0 );
+    cout << "NO" << endl; 
     return 0;
 }

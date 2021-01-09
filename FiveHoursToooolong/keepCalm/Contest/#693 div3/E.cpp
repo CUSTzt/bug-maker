@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 12:00:33
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,50 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+void up(){
+    int n;
+    cin >> n;
+    vector<pii> p(n);
+    for(auto &[x , y] : p){
+        cin >> x >> y;
+    }
+    vector<tuple<int , int , int> > t;
+    for(int i = 0; i < n; i++){
+        t.eb(p[i].fi , p[i].se , i);
+        t.eb(p[i].se , p[i].fi , i);
+    }
+    sort(ALL(t));
+    vector<tuple<int ,int ,int > > ok;
+    for(auto[x, y , z] : t){
+        if(ok.empty()){
+            ok.eb(x, y , z);
+        }
+        else {
+            auto [a, b , c] = ok.back();
+            if(y < b) {
+                ok.eb(x, y , z);
+            }
+        }
+    }
+    for(int i = 0; i < n; i++){
+        auto it = lower_bound(ALL(ok), make_tuple(p[i].fi , 0, 0));
+        if(it == ok.begin()){
+            cout << -1 << " ";
+        }else {
+            auto [a, b , c] = *prev(it);
+            if(b < p[i].se){
+                cout << c+1 << " ";
+            }else {
+                cout << -1 << " ";
+            }
+        }
+    }cout << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

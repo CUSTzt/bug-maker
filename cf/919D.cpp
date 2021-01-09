@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-07 13:17:10
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,50 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+// char s[maxn];
 int main()
 {
-    
+    close;
+    int n , m;
+    cin >> n >> m;
+    // cin >> s+1;
+    string s;
+    cin >> s;
+    s = "#"+s;
+    vi deg(n+10,0), g[n+10], num(30,0);
+    for(int i = 0; i < m; i++){
+        int x, y; cin >> x >> y;
+        deg[x]++;
+        g[y].eb(x);
+    }
+    int dp[n+10][30] = {0};
+    queue<int> q;
+    for(int i = 1; i <= n; i++){
+        if(deg[i] == 0) {
+            q.push(i);
+            dp[i][s[i]-'a'] = 1;
+        }
+    }
+    int now = 0, ans = 1;
+    while(q.size()){
+        now++;
+        auto x = q.front();
+        q.pop();
+        for(auto y : g[x]){
+            if(--deg[y] == 0){
+                q.push(y);
+            }
+            for(int j = 0; j <= 26; j++){
+                int tp = dp[x][j] + (s[y] == char('a'+j));
+                umax(dp[y][j], tp);
+                umax(ans , dp[y][j]);
+            }
+        }
+    }
+    if(now < n){
+        cout << -1 << endl;
+    }else {
+        cout << ans << endl;
+    }
     return 0;
 }

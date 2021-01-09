@@ -54,6 +54,19 @@ constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
 int main()
 {
-    
+    close;
+    int x, n, cnt = 0;
+    cin >> n;
+    while(n--){
+        cin >> x;
+        if(x & 1){
+            ++cnt;
+            if(cnt & 1) x += 1;
+            else x -= 1;
+            cout << x / 2<< endl;
+        }else {
+            cout << x / 2 << endl;
+        }
+    }
     return 0;
 }

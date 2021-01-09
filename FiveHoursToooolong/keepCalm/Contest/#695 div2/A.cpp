@@ -31,11 +31,10 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-constexpr int mod = 1e9+7;
-constexpr int Erica = 998244353;
-mt19937 dlsrand(random_device{}());
-mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
-int rnd(int x) { return mrand() % x;}
+constexpr int mod = 1e9+7; // 998244353
+// mt19937 dlsrand(random_device{}());
+// mt19937 mrand(std::chrono::system_clock::now().time_since_epoch().count()); 
+// int rnd(int x) { return mrand() % x;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 ll ex_gcd(ll a, ll b, ll& x, ll& y){if(!b){x=1;y=0;return a;}ll ret=ex_gcd(b,a%b,y,x);y-=a/b*x;return ret;}
 LL bin(LL x, LL n, LL MOD) {LL ret = MOD != 1;for (x %= MOD; n; n >>= 1, x = x * x % MOD)if (n & 1) ret = ret * x % MOD;return ret;}
@@ -51,9 +50,26 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+void up(){
+    vi a;
+    a.eb(9);
+    for(int i = 0; i < 9; i++) a.eb(i);
+    int n;
+    cin >> n;
+    if(n == 1){
+        cout << 9 << endl;
+        return ;
+    }
+    cout << 98 ;
+    for(int i = 3; i <= n; i++){
+        cout << a[(i-3) % 10];
+    }cout << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

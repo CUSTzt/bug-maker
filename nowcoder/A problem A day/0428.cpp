@@ -13,6 +13,7 @@
 //using namespace __gnu_pbds;
 using namespace std;
 using LL = long long;
+#define int LL
 #define eps 1e-8
 #define fi first
 #define se second
@@ -51,9 +52,37 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
+int n , m , T;
+int sh[maxn];
+struct node {
+    int a, b , c;// a美味 b损耗 c 完成时间
+    friend int operator < (node a, node b){
+        return a.c * b.b < b.c * a.a;
+    }
+}f[maxn];
+int dp[maxn];
+int32_t main()
 {
-    
+    close;
+    cin >> n >> m >> T;
+    for(int i = 1; i <= n; i++) {
+        cin >> sh[i];
+    }
+    for(int j = 1, x , y , z; j <= m; j++) {
+        cin >> x >> y >> z;
+        f[j] = {y , sh[x], z};
+    }
+    sort(f+1, f+1+m);
+    memset(dp , -INF, sizeof dp);
+    dp[0] = 0;
+    for(int i = 1; i <= m; i++){
+        for(int j = T; j >= f[i].c; j--){
+            umax(dp[j], dp[j-f[i].c]+f[i].a-j*f[i].b);
+        }
+    }
+    int ans = -INF;
+    for(int i = 1; i <= T; i++){
+        umax(ans , dp[i]);
+    }cout << ans << endl;
     return 0;
 }

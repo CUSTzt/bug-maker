@@ -51,9 +51,40 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n , m, fa[500][500], ans, u , v, w;
 int main()
 {
-    
+    close;
+    cin >> n >> m;
+    for(int i = 1; i <= 110; i++){
+        for(int j = 1; j <= 110; j++){
+            fa[i][j] = i;
+        }
+    }
+    function<int(int, int)> get = [&](int u , int v){
+        return fa[u][v] == u ? u : get(fa[u][v], v);
+    };
+    auto Union = [&](int u , int v , int w){
+        int fa1 = get(u , w), fa2 = get(v , w);
+        if(fa1 != fa2){
+            fa[fa1][w] = fa2;
+        }
+    };
+    for(int i = 1; i <= m; i++){
+        int u ,v , w ;
+        cin >> u >> v >> w;
+        Union(u , v , w);
+    }
+    int q;
+    cin >> q;
+    while(q--){
+        int a , b ;
+        cin >> a >> b;
+        int ans = 0;
+        for(int i = 1; i <= m; i++){
+            ans += (get(a , i) == get(b , i));
+        }
+        cout << ans << endl;
+    }
     return 0;
 }

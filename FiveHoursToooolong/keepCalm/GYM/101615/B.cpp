@@ -51,9 +51,32 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+int n , m , mx, a[maxn], dp[(1 << 12) + 10][13][705], num[(1<<12)+10];
 int main()
 {
-    
+    memset(dp , 0xff , sizeof dp);
+    cin >> n >> m;
+    for(int i = 0 ; i < n; i++) {
+        cin >> a[i];
+        umax(mx, a[i]);
+    }
+    for(int i = 1; i < (1 << n); i++){
+        num[i] = num[i-(i & -i)] + 1;
+    }
+    int ans= 0;
+    function<int (int , int , int) > dfs = [&](int s , int pre , int res){
+        if(res < 0) return 0;
+        if(s + 1 == 1 << n) return 1;
+        if(~dp[s][pre][res]) return dp[s][pre][res];
+        dp[s][pre][res] = 0;
+        for(int i = 0; i < n; i++){
+            if(!(s >> i & 1)) dp[s][pre][res] += dfs(s|1 << i , i , res - max(a[pre] - a[i] + 1, 0) * (n - num[s]));
+        }
+        return dp[s][pre][res];
+    } ;
+    for(int i = 0; i < n; i++){
+        if(mx != a[i]) ans += dfs(1 << i , i , m - (mx - a[i] + 1) * n);
+    }
+    cout << ans << endl;
     return 0;
 }

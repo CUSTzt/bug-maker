@@ -22,7 +22,7 @@ using LL = long long;
 #define ALL(x) (x).begin(),(x).end()
 #define trav(a,x) for (auto& a: x)
 #define LOG(FMT...) fprintf(stderr, FMT)
-#define close std::ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr),cout<<fixed<<setprecision(10)
+#define close std::ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr),cout<<fixed<<setprecision(3)
 #define FOR(i, x, y) for (LL i = (x), _##i = (y); i < _##i; ++i)
 #define FORD(i, x, y) for (LL i = (x), _##i = (y); i > _##i; --i)
 #define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
@@ -51,9 +51,14 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+double k , p , x, ans = 1e20;
 int main()
 {
-    
+    close;
+    cin >> k >> p >> x;
+    for(int i = 1; i <= 10000; i++){
+        umin(ans , 1.0*k*p/i + 1.0*x*i);
+    }
+    cout << ans << endl;
     return 0;
 }

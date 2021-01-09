@@ -52,8 +52,29 @@ constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
+void up(){
+    string s;
+    cin >> s;
+    int len = s.size();
+    s = "#" + s;
+    int dp[5][len+10];
+    memset(dp , 0x3f , sizeof dp);
+    for(int i = 0; i < 5; i++) dp[i][0] = 0; 
+    for(int i = 1; i <= len; i++){
+        if(s[i-2] != s[i] && s[i-1] != s[i])dp[0][i] = dp[0][i-1];
+        dp[1][i] = dp[0][i-1]+1;
+        if(s[i-2] != s[i]) dp[2][i] = dp[1][i-1];
+        dp[3][i] = dp[1][i-1]+1;
+        if(s[i-1]!= s[i])umin(dp[0][i], dp[2][i-1]);
+        umin(dp[1][i], dp[2][i-1]+1), umin(dp[2][i], dp[3][i-1]),umin(dp[3][i], dp[3][i-1]+1);
+    }
+    cout << min({dp[0][len],dp[1][len], dp[2][len],dp[3][len]}) << endl;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

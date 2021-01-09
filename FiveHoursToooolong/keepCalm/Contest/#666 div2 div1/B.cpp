@@ -5,9 +5,21 @@
 //~ #pragma GCC target ("avx2")
 //~ #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
 #include <algorithm>
+#include <stack>
+#include <queue>
+#include <map>
+#include <set>
+#include <vector>
+#include <random>
+#include <cmath>
+#include <chrono>
+#include <cstring>
+#include <string>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <bitset>
 #include <cassert>
-#include <bits/stdc++.h>
-#include <functional>
 //#include <ext/pb_ds/assoc_container.hpp>
 //#include <ext/pb_ds/tree_policy.hpp>
 //using namespace __gnu_pbds;
@@ -22,7 +34,7 @@ using LL = long long;
 #define ALL(x) (x).begin(),(x).end()
 #define trav(a,x) for (auto& a: x)
 #define LOG(FMT...) fprintf(stderr, FMT)
-#define close std::ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr),cout<<fixed<<setprecision(10)
+#define close std::ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
 #define FOR(i, x, y) for (LL i = (x), _##i = (y); i < _##i; ++i)
 #define FORD(i, x, y) for (LL i = (x), _##i = (y); i > _##i; --i)
 #define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
@@ -50,10 +62,35 @@ const double PI = acos(-1.0);
 constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
-constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+constexpr int maxn = 1e5+10; // remember to calculate. if tle, check maxn first.
+ll n , a[maxn], b[maxn];
+void up(){
+    cin >> n;
+    ll cnt = 0;
+    for(int i = 1; i <= n; i++) cin >> a[i], cnt += a[i];
+    if(n == 2){
+        cout << min(a[1], a[2]) - 1 << endl;
+    }
+    else{
+        sort(a+1, a+n+1);
+        ll ans = linf;
+        for(int i = 1; i <= maxn; i++){
+            ll now = 1, sum = 0, fl = 0;
+            for(int j = 1; j <= n; j++){
+                b[j] = now, now = now * i, sum += abs(b[j] - a[j]);
+                if(sum > cnt){
+                    fl = 1;break;
+                }
+            }
+            if(fl ) break;
+            umin(ans , sum);
+        }
+        cout << ans << endl;
+    }
+}
 int main()
 {
-    
+    close;
+    up();
     return 0;
 }

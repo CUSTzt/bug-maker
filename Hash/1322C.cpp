@@ -13,6 +13,7 @@
 //using namespace __gnu_pbds;
 using namespace std;
 using LL = long long;
+#define int LL
 #define eps 1e-8
 #define fi first
 #define se second
@@ -51,9 +52,47 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
-int main()
+void up(){
+    map<pii , int> f;
+    int n , m , ans = 0;
+    cin >> n >> m;
+    vi v[n+10];
+    vi c(n+10), g(n+10);
+    for(int i = 1; i <= n; i++) cin >> c[i];
+    // cout << "fuck " << endl;
+    for(int i = 1; i <= m; i++) {
+        // cout << "fuckkkk" << endl;
+        int a , b ;
+        cin >> a >> b;
+        // cout << "a === " << a << "   b === " << b << endl;
+        v[b].eb(a);
+    }
+    for(int i = 1; i <= n; i++){
+        if(SZ(v[i]))sort(ALL(v[i]));
+    }
+    for(int i = 1; i <= n; i++){
+        if(!SZ(v[i])) continue;
+        int tp1 = 0, tp2 = 0;
+        for(auto x : v[i]){
+            tp1 = (tp1 * base % P_1 + x) % P_1;
+            tp2 = (tp2 * base % P_2 + x) % P_2;
+        }
+        pii p = {tp1, tp2};
+        if(f.count(p) == 0){
+            f[p] = i;
+        }
+        g[f[p]] += c[i];
+    }
+    for(int i = 1; i <= n; i++){
+        ans = gcd(ans , g[i]);
+    }
+    cout << ans << endl;
+}
+int32_t main()
 {
-    
+    close;
+    CASET{
+        up();
+    }
     return 0;
 }

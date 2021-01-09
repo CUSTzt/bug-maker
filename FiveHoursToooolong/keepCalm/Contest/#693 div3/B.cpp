@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 11:27:42
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -54,6 +55,28 @@ constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
 
 int main()
 {
+    close;
+    CASET{
+        ll s = 0, t1 = 0, t2 = 0, n;
+        cin >> n;
+        while(n--){
+            int x;
+            cin >> x;
+            t1 += (x == 1);
+            t2 += (x == 2);
+            s += x;
+        }
+        if(s & 1){
+            cout << "NO" << endl;
+            continue;
+        }
+        s /= 2;
+        if((s&1) && !t1){
+            cout << "NO" << endl;
+        }else {
+            cout << "YES" << endl;
+        }
+    }
     
     return 0;
 }

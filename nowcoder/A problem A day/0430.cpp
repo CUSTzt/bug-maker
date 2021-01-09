@@ -51,9 +51,54 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+struct node {
+    int l , r, x , id;
+    friend int operator < (node const &a, node const &b){
+        return a.x < b.x;
+    }
+}query[maxn];
+pii a[maxn];
+int tree[maxn], ans[maxn], n;
+#define lowbit(x) (x&-x)
+void update(int pos , int c){
+    while(pos <= n) {
+        tree[pos] += c;
+        pos += lowbit(pos);
+    }
+}
+int Query(int pos){
+    int ret = 0;
+    while(pos){
+        ret += tree[pos];
+        pos -= lowbit(pos);
+    }
+    return ret;
+}
 int main()
 {
-    
+    close;
+    int m;
+    cin >> n >> m;
+    for(int i = 1; i <= n; i++){
+        cin >> a[i].fi;
+        a[i].se = i;
+    }
+    sort(a+1, a+1+n);
+    for(int i = 1; i <= m; i++){
+        cin >> query[i].l >> query[i].r >> query[i].x;
+        query[i].id = i;
+    }
+    sort(query+1, query+1+m);
+    int now = 1;
+    for(int i = 1; i <= m; i++){
+        while(a[now].fi <= query[i].x && now <= n){
+            update(a[now].se, 1);
+            now++;
+        }
+        ans[query[i].id] = Query(query[i].r) - Query(query[i].l-1); 
+    }
+    for(int i = 1; i <= m; i++){
+        cout << ans[i] << endl;
+    }
     return 0;
 }

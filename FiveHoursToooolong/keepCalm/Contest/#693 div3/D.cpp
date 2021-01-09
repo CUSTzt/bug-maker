@@ -1,3 +1,4 @@
+// @DateTime:    2021-01-06 11:36:13
 //~ while (clock()<=69*CLOCKS_PER_SEC)
 //~ #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("O3")
@@ -51,9 +52,65 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+template <typename T>
+void read(T &x) {
+    x = 0;
+    int f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = x * 10 + (ch ^ 48);
+        ch = getchar();
+    }
+    x *= f;
+    return;
+}
+template <typename T>
+void write(T x) {
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
+}
+template <class T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for (T &x : v) is >> x;
+    return is;
+}
+template <class T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    if (!v.empty()) {
+        os << v.front();
+        for (int i = 1; i < v.size(); ++i) os << ' ' << v[i];
+    }
+    return os;
+}
 int main()
 {
-    
+    close;
+    CASET{
+        int n;
+        cin >> n;
+        vi a(n);
+        cin >> a;
+        sort(ALL(a), [&](int x, int y){
+            return x > y;
+        });
+        ll alice = 0, bob = 0;
+        for(int i = 0; i < n; i++){
+            if(i & 1){
+                if(a[i] & 1) bob+=a[i];
+            }else {
+                if(a[i] % 2 == 0) alice+=a[i];
+            }
+        }
+        cout << (alice == bob ? "Tie" : (alice > bob ? "Alice" : "Bob")) << endl;
+    }
     return 0;
 }

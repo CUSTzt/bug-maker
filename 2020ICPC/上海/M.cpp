@@ -51,9 +51,76 @@ constexpr int INF = 0x3f3f3f3f;
 constexpr ll linf = 0x3f3f3f3f3f3f3f3f;
 constexpr ull base=2333, P_1=19260817, P_2=999998639;
 constexpr int maxn = 1e6+10; // remember to calculate. if tle, check maxn first.
-
+vector<string> tp;
+string s;
+int n , m , ans;
 int main()
 {
-    
+    close;
+    string root = "";
+    CASET{
+        cin >> n >> m;
+        ans = 0;
+        map<string , set<string> > son;
+        set<string> cant;
+        auto fenge = [&](string s){
+            tp.clear();
+            string st = "";
+            for(auto i : s){
+                if(i == '/'){
+                    tp.eb(st);
+                }else {
+
+                }
+                st = st+i;
+            }
+            if(st!="")tp.eb(st);
+        };
+        for(int i = 1; i <= n; i++){
+            cin >> s;
+            fenge(s);
+            string st = root;
+            for(auto i : tp){
+                if(son[st].count(i)){
+
+                }else {
+                    son[st].insert(i);
+                }
+                st = i;
+            }
+        }
+        for(int i = 1; i <= m; i++){
+            cin >> s;
+            fenge(s);
+
+            string st =  root;
+            for(auto i : tp){
+                if(son[st].count(i)){
+
+                }else {
+                    son[st].insert(i);
+                }
+                st = i;
+            }
+            cant.insert(st);
+        }
+        function<void (string)> dfs1 = [&](string u){
+            for(auto v : son[u]){
+                dfs1(v);
+                if(cant.count(v)){
+                    cant.insert(u);
+                }
+            }
+        };
+        function<void (string)> dfs2 = [&](string u){
+            for(auto v : son[u]){
+                if(cant.count(v)){
+                    dfs2(v);
+                }else {ans++;}
+            }
+        };
+        dfs1(root);dfs2(root);
+        cout << ans << endl;
+    }
     return 0;
 }
